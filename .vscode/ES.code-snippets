@@ -1,0 +1,229 @@
+{
+	"ES_Concern": {
+		"scope": "diagram",
+		"prefix": [
+			"Concern",
+			"esConcern"
+		],
+		"body": [
+			"Concern(${1:alias}, \"${2:label}\", \"${3}\")",
+			"$0"
+		],
+		"description": "ES Add concern to diagram"
+	},
+	"ES_System": {
+		"scope": "diagram",
+		"prefix": [
+			"System",
+			"esSystem"
+		],
+		"body": [
+			"System(${1:alias}, \"${2:label}\", \"${3}\")",
+			"$0"
+		],
+		"description": "ES add system to diagram"
+	},
+	"ES_Event": {
+		"scope": "diagram",
+		"prefix": [
+			"Event",
+			"esEvent"
+		],
+		"body": [
+			"Event(${1:alias}, \"${2:label}\", \"${3}\")",
+			"$0"
+		],
+		"description": "ES add event to diagram"
+	},
+	"ES_Aggregate": {
+		"scope": "diagram",
+		"prefix": [
+			"Aggregate",
+			"esAggregate",
+		],
+		"body": [
+			"Aggregate(${1:alias}, \"${2:label}\", \"${3}\")",
+			"$0"
+		],
+		"description": "Add aggregate to ES diagram"
+	},
+	"ES_Read_Model": {
+		"scope": "diagram",
+		"prefix": [
+			"Read Model",
+			"esReadModel"
+		],
+		"body": [
+			"ReadModel(${1:alias}, \"${2:label}\", \"${3}\")",
+			"$0"
+		],
+		"description": "ES add read model to diagram"
+	},
+	"ES_Command": {
+		"scope": "diagram",
+		"prefix": [
+			"Command",
+			"esCommand"
+		],
+		"body": [
+			"Command(${1:alias}, \"${2:label}\", \"${3}\")",
+			"$0"
+		],
+		"description": "ES add command to diagram"
+	},
+	"ES_Policy": {
+		"scope": "diagram",
+		"prefix": [
+			"Policy",
+			"esPolicy"
+		],
+		"body": [
+			"Policy(${1:alias}, \"${2:label}\", \"${3}\")",
+			"$0"
+		],
+		"description": "ES add policy to diagram"
+	},
+	"ES_Bounded_Context": {
+		"scope": "diagram",
+		"prefix": [
+			"Bounded Context",
+			"esBoundedContext"
+		],
+		"body": [
+			"BoundedContext(${1:alias}, \"${2:label}\"){",
+			"\t$0",
+			"}"
+		],
+		"description": "ES add bounded context to diagram"
+	},
+	"ES_Relationship": {
+		"scope": "diagram",
+		"prefix": [
+			"Relationship",
+			"esRelationship"
+		],
+		"body": [
+			"Rel(${1:from_alias}, ${2:to_alias}, \"${3}\")",
+			"$0"
+		],
+		"description": "ES add relationship to diagram"
+	},
+	"ES_Relationship_Left": {
+		"scope": "diagram",
+		"prefix": [
+			"Relationship Left",
+			"esRelationshipLeft"
+		],
+		"body": [
+			"Rel_L(${1:from_alias}, ${2:to_alias}, \"${3}\")",
+			"$0"
+		],
+		"description": "ES add left relationship to diagram"
+	},
+	"ES_Relationship_Right": {
+		"scope": "diagram",
+		"prefix": [
+			"Relationship Right",
+			"esRelationshipRight"
+		],
+		"body": [
+			"Rel_R(${1:from_alias}, ${2:to_alias}, \"${3}\")",
+			"$0"
+		],
+		"description": "ES add right relationship to diagram"
+	},
+	"ES_Relationship_Up": {
+		"scope": "diagram",
+		"prefix": [
+			"Relationship Up",
+			"esRelationshipUp"
+		],
+		"body": [
+			"Rel_L(${1:from_alias}, ${2:to_alias}, \"${3}\")",
+			"$0"
+		],
+		"description": "ES add upward relationship to diagram"
+	},
+	"ES_Relationship_Down": {
+		"scope": "diagram",
+		"prefix": [
+			"Relationship Down",
+			"esRelationshipDown"
+		],
+		"body": [
+			"Rel_D(${1:from_alias}, ${2:to_alias}, \"${3}\")",
+			"$0"
+		],
+		"description": "ES add downward relationship to diagram"
+	},
+	"ES_Layout_Right": {
+		"scope": "diagram",
+		"prefix": [
+			"Layout to Right side",
+			"esLayoutRight"
+		],
+		"body": [
+			"Lay_R(${1:from_alias}, ${2:to_alias})",
+			"$0"
+		],
+		"description": "ES put {to} to the right of {from}"
+	},
+	"ES_Layout_Left": {
+		"scope": "diagram",
+		"prefix": [
+			"Layout to Left side",
+			"esLayoutLeft"
+		],
+		"body": [
+			"Lay_L(${1:from_alias}, ${2:to_alias})",
+			"$0"
+		],
+		"description": "ES put {to} to the left of {from}"
+	},
+	"ES_Boundary": {
+		"scope": "diagram",
+		"prefix": [
+			"Boundary",
+			"esBoundary"
+		],
+		"body": [
+			"Boundary(${1:alias}, \"${2:label}\", \"${3}\"){",
+			"\t$0",
+			"}"
+		],
+		"description": "ES add boundary to diagram"
+	},
+	"ES_Layout_With_Legend": {
+		"scope": "diagram",
+		"prefix": [
+			"Layout with legend",
+			"esLegend"
+		],
+		"body": [
+			"LAYOUT_WITH_LEGEND()"
+		],
+		"description": "ES add legend to diagram"
+	},
+	"ES_Layout_Left_Right": {
+		"scope": "diagram",
+		"prefix": [
+			"Layout left to right",
+			"Left to right layout"
+		],
+		"body": [
+			"LAYOUT_LEFT_RIGHT()"
+		],
+		"description": "ES Left to right diagram layout"
+	},
+	"ES_Layout_Top_Down": {
+		"scope": "diagram",
+		"prefix": [
+			"Layout top down",
+			"Top down layout"
+		],
+		"body": [
+			"LAYOUT_TOP_DOWN()"
+		],
+		"description": "ES Top down diagram layout"
+	}
+}

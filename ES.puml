@@ -1,0 +1,267 @@
+' Event Storming
+
+' Colors
+' ##################################
+
+!global $ARROW_FONT_COLOR = "#263238"
+
+!global $BOUNDARY_FONT_COLOR = "#263238"
+!global $BOUNDARY_BORDER_COLOR = "#263238"
+
+!global $LEGEND_FONT_COLOR = "#FFFFFF"
+!global $LEGEND_TITLE_FONT_COLOR = "#000000"
+!global $LEGEND_BACKGROUND_COLOR = "transparent"
+
+!global $BORDER_COLOR = "transparent"
+!global $ARROW_COLOR = "#263238"
+
+!global $CONCERN_FONT_COLOR = "#FFFFFF"
+!global $SYSTEM_FONT_COLOR = "#FFFFFF"
+!global $EVENT_FONT_COLOR = "#FFFFFF"
+!global $AGGREGATE_FONT_COLOR = "#000000"
+!global $READ_MODEL_FONT_COLOR = "#FFFFFF"
+!global $COMMAND_FONT_COLOR = "#FFFFFF"
+!global $POLICY_FONT_COLOR = "#FFFFFF"
+
+!global $CONCERN_BG_COLOR = "#EF5350"
+!global $SYSTEM_BG_COLOR = "#F06292"
+!global $EVENT_BG_COLOR = "#FF9800"
+!global $AGGREGATE_BG_COLOR = "#FFEB3B"
+!global $READ_MODEL_BG_COLOR = "#4CAF50"
+!global $COMMAND_BG_COLOR = "#03A9F4"
+!global $POLICY_BG_COLOR = "#673AB7"
+
+
+' Styling
+' ##################################
+
+top to bottom direction
+hide circle 
+hide members
+hide stereotype
+
+skinparam MinClassWidth 100
+skinparam shadowing false
+skinparam nodesep 10
+skinparam ranksep 10
+skinparam defaultTextAlignment center
+
+skinparam wrapWidth 200
+
+' strangely setting the legend font color to white also
+' turns the borders white - which is what I want...
+skinparam LegendFontColor $LEGEND_FONT_COLOR
+skinparam LegendBorderColor $BORDER_COLOR
+skinparam LegendBackgroundColor $LEGEND_BACKGROUND_COLOR
+skinparam BorderColor $BORDER_COLOR
+
+skinparam class {
+    StereotypeFontSize 12
+}
+
+skinparam Arrow {
+    Color $ARROW_COLOR
+    FontColor $ARROW_FONT_COLOR
+    FontSize 12
+}
+
+skinparam rectangle<<group>> {
+    FontColor transparent
+    BorderColor transparent
+}
+
+skinparam rectangle<<boundary>> {
+    FontColor $BOUNDARY_FONT_COLOR
+    BorderColor $BOUNDARY_BORDER_COLOR
+    BorderStyle dashed
+}
+
+skinparam class<<concern>> {
+    FontColor $CONCERN_FONT_COLOR
+    BorderColor $BORDER_COLOR
+    BackgroundColor $CONCERN_BG_COLOR
+}
+
+skinparam class<<system>> {
+    FontColor $SYSTEM_FONT_COLOR
+    BorderColor $BORDER_COLOR
+    BackgroundColor $SYSTEM_BG_COLOR
+}
+
+skinparam class<<event>> {
+    FontColor $EVENT_FONT_COLOR
+    BorderColor $BORDER_COLOR
+    BackgroundColor $EVENT_BG_COLOR
+}
+
+skinparam class<<aggregate>> {
+    FontColor $AGGREGATE_FONT_COLOR
+    BorderColor $BORDER_COLOR
+    BackgroundColor $AGGREGATE_BG_COLOR
+}
+
+skinparam class<<readmodel>> {
+    FontColor $READ_MODEL_FONT_COLOR
+    BorderColor $BORDER_COLOR
+    BackgroundColor $READ_MODEL_BG_COLOR
+}
+
+skinparam class<<command>> {
+    FontColor $COMMAND_FONT_COLOR
+    BorderColor $BORDER_COLOR
+    BackgroundColor $COMMAND_BG_COLOR
+}
+
+skinparam class<<policy>> {
+    FontColor $POLICY_FONT_COLOR
+    BorderColor $BORDER_COLOR
+    BackgroundColor $POLICY_BG_COLOR
+}
+
+
+' Layout
+' ##################################
+
+!function LAYOUT_WITH_LEGEND()
+hide stereotype
+legend bottom right
+|<color:$LEGEND_TITLE_FONT_COLOR>**Legend**</color> |
+|<$CONCERN_BG_COLOR> <color:$CONCERN_FONT_COLOR>concern</color> |
+|<$SYSTEM_BG_COLOR> <color:$SYSTEM_FONT_COLOR>system</color> |
+|<$EVENT_BG_COLOR> <color:$EVENT_FONT_COLOR>event</color> |
+|<$AGGREGATE_BG_COLOR> <color:$AGGREGATE_FONT_COLOR>aggregate</color> |
+|<$READ_MODEL_BG_COLOR> <color:$READ_MODEL_FONT_COLOR>read model</color> |
+|<$COMMAND_BG_COLOR> <color:$COMMAND_FONT_COLOR>command</color> |
+|<$POLICY_BG_COLOR> <color:$POLICY_FONT_COLOR>policy</color> |
+endlegend
+!endfunction
+
+!function LAYOUT_TOP_DOWN()
+top to bottom direction
+!endfunction
+
+!function LAYOUT_LEFT_RIGHT() 
+left to right direction
+!endfunction
+
+' Boundaries
+' ##################################
+
+!unquoted function BoundedContext($alias, $label)
+rectangle "==$label\n<size:12>BoundedContext</size>" <<boundary>>  as $alias 
+!endfunction
+
+' Groups
+' ##################################
+
+!unquoted function Group($alias)
+rectangle "Group" <<group>> as $alias   
+!endfunction
+
+' Elements
+' ##################################
+
+!unquoted function Concern($alias, $label, $descr="")
+class "==$label\n\n $descr" as $alias <<concern>> 
+!endfunction
+
+!unquoted function System($alias, $label, $descr="")
+class "==$label\n\n $descr" as $alias <<system>> 
+!endfunction
+
+!unquoted function Event($alias, $label, $descr="")
+class "==$label\n\n $descr" as $alias <<event>> 
+!endfunction
+
+!unquoted function Aggregate($alias, $label, $descr="")
+class "==$label\n\n $descr" as $alias <<aggregate>> 
+!endfunction
+
+!unquoted function ReadModel($alias, $label, $descr="")
+class "==$label\n\n $descr" as $alias  <<readmodel>> 
+!endfunction
+
+!unquoted function Command($alias, $label, $descr="", $actor="")
+!if ($actor != "") 
+class "==$label\n\n $descr" as $alias< $actor > <<command>> 
+!else 
+class "==$label\n\n $descr" as $alias <<command>>
+!endif
+!endfunction
+
+!unquoted function Policy($alias, $label, $descr="")
+class "==$label\n\n $descr" as $alias <<policy>> 
+!endfunction
+
+' Relationship
+' ##################################
+
+!unquoted function Label_($label="")
+!if ($label != "")
+: $label
+!endif
+!endfunction
+
+!unquoted function Rel_($alias1, $alias2, $label, $direction="")
+$alias1 $direction $alias2 Label_($label)
+!endfunction
+
+!unquoted function Rel($from, $to, $label="")
+Rel_($from, $to, $label, "-->") 
+!endfunction
+
+!unquoted function Rel_Back($from, $to, $label="")
+Rel_($from, $to, $label, "<--")
+!endfunction
+
+!unquoted function Rel_Neighbor($from, $to, $label="")
+Rel_($from, $to, $label, "->")
+!endfunction
+
+!unquoted function Rel_Back_Neighbor($from, $to, $label="")
+Rel_($from, $to, $label, "<-")
+!endfunction
+
+!unquoted function Rel_D($from, $to, $label="")
+Rel_($from, $to, $label, "-down->")
+!endfunction
+!unquoted function Rel_Down($from, $to, $label="")
+Rel_($from, $to, $label, "-down->")
+!endfunction
+
+!unquoted function Rel_U($from, $to, $label="")
+Rel_($from, $to, $label, "-up->")
+!endfunction
+!unquoted function Rel_Up($from, $to, $label="")
+Rel_($from, $to, $label, "-up->")
+!endfunction
+
+!unquoted function Rel_L($from, $to, $label="")
+Rel_($from, $to, $label, "-left->")
+!endfunction
+!unquoted function Rel_Left($from, $to, $label="")
+Rel_($from, $to, $label, "-left->")
+!endfunction
+
+!unquoted function Rel_R($from, $to, $label="")
+Rel_($from, $to, $label, "-right->")
+!endfunction
+!unquoted function Rel_Right($from, $to, $label="")
+Rel_($from, $to, $label, "-right->")
+!endfunction
+
+' Layout Helpers
+' ##################################
+
+!unquoted function Lay_D($from, $to)
+$from -[hidden]d- $to
+!endfunction
+!unquoted function Lay_U($from, $to)
+$from -[hidden]u- $to
+!endfunction
+!unquoted function Lay_R($from, $to)
+$from -[hidden]r- $to
+!endfunction
+!unquoted function Lay_L($from, $to)
+$from -[hidden]l- $to
+!endfunction

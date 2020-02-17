@@ -1,0 +1,97 @@
+@startuml Feature_Explorer_Event_Model
+!include ES.puml
+
+'left to right layout actually seems to produce more of a top
+'down layout - but also messes up other things like note placement
+'LAYOUT_LEFT_RIGHT()
+
+' layout top down is the default, so isn't really required
+' LAYOUT_TOP_DOWN()
+LAYOUT_WITH_LEGEND()
+
+title **Event Storming Diagram**
+
+BoundedContext(allCardTypes, "All Card Types") {
+Concern(concern, "A Concern")
+System(system, "A System")
+Event(event, "An Event")
+Aggregate(aggregate, "An aggregate card", "Aggregates are also groups...")
+ReadModel(readModel, "A Read Model")
+Command(command, "A Command")
+Policy(policy, "A Policy")
+}
+
+note bottom of allCardTypes
+The card types bounded context is displayed last instead of first.
+
+The card types are displayed in order but not kept on one line.
+
+Also this note is supposed to be at the bottom of the bounded context.
+endnote
+
+
+BoundedContext(orders, "Orders"){
+  Group(orderCommands) {
+    Command(placeOrder, "Place Order", "") 
+    Command(cancelOrder, "Cancel Order", "")
+    Command(validateOrder, "Validate Order", "")
+  }
+  Group(orderAggregate) {
+    Aggregate(erica, "Orders", "")
+  }
+  Group(orderEvents) {
+    Event(orderPlaced, "Order Placed", "") 
+    Event(orderCancelled, "Order Cancelled", "")
+    Event(orderValidated, "Order Validated", "")
+  }  
+  Lay_L(orderAggregate, orderCommands)
+  Lay_R(orderAggregate, orderEvents)
+}
+note bottom of orders
+The groups are displayed in reverse order for some reason and 
+my layout macros aren't helping.
+
+Also groups are spaced too far apart.
+endnote
+
+
+BoundedContext(sampleContext, "Sample Context"){
+  Event(e1, "one", "")
+  Event(e2, "two", "")
+  Command(c1, "one", "")
+  Command(c2, "two", "")
+  Command(c3, "three", "")
+  Aggregate(a1, "one", "")
+  Event(e4, "four", "")
+  Event(e5, "five", "")
+  Event(e6, "six", "")
+  Event(e7, "seven", "")
+  Event(e8, "eight", "")
+  Command(c4, "four", "")
+  Command(c5, "five", "")
+  Aggregate(a2, "two", "")
+  Lay_L(a1, c1) 
+  Lay_D(c1, c2)
+  Lay_D(c2, c3)
+  Lay_R(a1, e1)
+  Lay_D(e1, e2)
+  Lay_L(a2, c4)
+  Lay_R(a2, e4)
+  Lay_L(a2, c4) 
+  Lay_D(c4, c5)
+  Lay_R(a2, e4)
+  Lay_D(e4, e5)
+  Lay_D(e5, e6)
+  Lay_D(e6, e7)
+  Lay_D(e7, e8)
+  Lay_L(a2, c4)
+  Lay_D(c4, c5)
+}
+note bottom of sampleContext
+With a lot of effort I can get commands, aggregates,
+and events more or less where I want them.
+
+The spacing is still odd though.
+endnote
+
+@enduml
